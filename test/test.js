@@ -11,7 +11,9 @@ beforeEach(function (done) {
         d: 20
       }
     },
-    e: 30
+    e: 30,
+    m: [10, 20, 30],
+    n: [[50, 20], [30, 40]]
   };
   done();
 });
@@ -43,6 +45,16 @@ describe('get', function () {
     should.not.exist(obj.p);
   });
 
+  it('should grab data from an array', function () {
+    var val = strpath(obj, 'm[1]');
+    val.should.equal(obj.m[1]);
+  });
+
+  it('should grab data from nested arrays', function () {
+    var val = strpath(obj, 'n[1][0]');
+    val.should.equal(obj.n[1][0]);
+  });
+
 });
 
 describe('set', function () {
@@ -70,6 +82,39 @@ describe('set', function () {
   it('should not overwrite existing data', function () {
     var val = strpath(obj, 'a.b.z', 80);
     obj.a.b.should.equal(10);
+  });
+
+  it('should set data in an array', function () {
+    var val = strpath(obj, 'a.q[3].a', 80);
+    Array.isArray(obj.a.q).should.be.ok;
+    obj.a.q[3].a.should.equal(80);
+  });
+
+  it('should set able to set data in nested arrays', function () {
+    var val = strpath(obj, 'a.q[3][0].a', 80);
+    Array.isArray(obj.a.q).should.be.ok;
+    Array.isArray(obj.a.q[3]).should.be.ok;
+    obj.a.q[3][0].a.should.equal(80);
+  });
+
+});
+
+describe('isNumeric', function () {
+
+  it('should recognise an integer', function () {
+    strpath.isNumeric('10').should.be.ok;
+  });
+
+  it('should recognise an float', function () {
+    strpath.isNumeric('10.6').should.be.ok;
+  });
+
+  it('should fail on a string', function () {
+    strpath.isNumeric('hello').should.not.be.ok;
+  });
+
+  it('should fail on undefined data', function () {
+    strpath.isNumeric(undefined).should.not.be.ok;
   });
 
 });
