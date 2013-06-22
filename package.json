@@ -1,0 +1,16 @@
+{
+  "name": "strpath",
+  "version": "0.0.0",
+  "description": "Access JSON properties using a dot-delimited path.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "repository": "",
+  "author": "Tom Ashworth <tom@phuu.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "should": "~1.2.2",
+    "mocha": "~1.11.0"
+  }
+}
