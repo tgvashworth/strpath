@@ -1,6 +1,6 @@
 {
   "name": "strpath",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Access JSON properties using a dot-delimited path.",
   "main": "index.js",
   "scripts": {
