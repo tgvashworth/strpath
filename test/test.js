@@ -55,6 +55,15 @@ describe('get', function () {
     val.should.equal(obj.n[1][0]);
   });
 
+  it('should reject keys are are not strings', function () {
+    (function(){
+      strpath(obj, {});
+    }).should.throw();
+    (function(){
+      strpath(obj, null);
+    }).should.throw();
+  });
+
 });
 
 describe('set', function () {
